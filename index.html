@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentMind Connect | Transforma tu vida universitaria</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0b0f19;
+            --bg-card: #131c2e;
+            --primary-cyan: #00f0ff;
+            --primary-blue: #3b82f6;
+            --accent-coral: #ff5e62;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(0, 240, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navegación */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-cyan);
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--text-main);
+        }
+
+        .logo-text span {
+            color: var(--primary-cyan);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-cyan);
+        }
+
+        /* Sección Hero (Impactante) */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 20px 80px 20px;
+            background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 60px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 30%, var(--primary-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2vw, 19px);
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 14px;
+            color: var(--primary-cyan);
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Secciones Generales */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Tarjetas de Beneficios / Pilares */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-cyan);
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* Cómo Funciona (Pasos) */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            position: relative;
+        }
+
+        .step-card {
+            background: linear-gradient(180deg, rgba(19, 28, 46, 0.8) 0%, rgba(11, 15, 25, 0.9) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-cyan);
+            color: var(--bg-dark);
+            font-weight: 800;
+            font-size: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+
+        .step-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Testimonios */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .testimonial-text {
+            color: var(--text-muted);
+            font-size: 15px;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author h4 {
+            font-size: 16px;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .testimonial-author span {
+            font-size: 13px;
+            color: var(--primary-cyan);
+        }
+
+        /* Sección Final y Único Botón de Test */
+        .final-cta {
+            text-align: center;
+            padding: 120px 20px;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.08) 0%, transparent 70%);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .final-cta h2 {
+            font-size: clamp(30px, 4vw, 48px);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .final-cta p {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        .btn-test {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
+            color: var(--bg-dark);
+            font-weight: 700;
+            font-size: 18px;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-test:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 45px rgba(0, 240, 255, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación con Logo de la Carpeta -->
+    <header>
+        <div class="logo-container">
+            <!-- Reemplaza el src con la ruta exacta de tu logo en tu carpeta local -->
+            <img src="LOGO TECHNICAL.jpg" alt="Logo StudentMind Connect" class="logo-img">
+            <div class="logo-text">StudentMind <span>Connect</span></div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#beneficios">Beneficios</a></li>
+                <li><a href="#como-funciona">Cómo Funciona</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sección Hero / Inicio (Super Llamativa) -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Comunidad Académica Inteligente</div>
+            <h1>Eleva tu rendimiento universitario sin descuidar tu paz mental</h1>
+            <p>Un espacio creado por estudiantes y para estudiantes. Descubre métodos de organización, optimiza tus tiempos de lectura, supera la saturación y encuentra el equilibrio perfecto en tu etapa universitaria.</p>
+        </div>
+    </section>
+
+    <!-- Sección de Beneficios / Todo en General -->
+    <section id="beneficios">
+        <h2 class="section-title">Todo lo que necesitas en un solo lugar</h2>
+        <p class="section-subtitle">Diseñado para ayudarte a simplificar cada ciclo académico con herramientas modernas y cercanas.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📂</div>
+                <h3>Organización Digital Limpia</h3>
+                <p>Aprende a estructurar tus carpetas, apuntes y lecturas para dejar de perder horas buscando archivos perdidos antes de cada examen.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧘‍♂️</div>
+                <h3>Bienestar y Cero Burnout</h3>
+                <p>Estrategias orientadas a cuidar tu salud mental, gestionar el estrés de las semanas pesadas y recuperar tus horas de descanso.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Soporte y Compañerismo</h3>
+                <p>Conecta con metodologías de estudio colaborativo y guías prácticas explicadas de estudiante a estudiante, sin complicaciones.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Cómo Funciona -->
+    <section id="como-funciona">
+        <h2 class="section-title">¿Cómo transformamos tu rutina?</h2>
+        <p class="section-subtitle">Un proceso estructurado para llevarte del agobio a la claridad total.</p>
+        
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Identifica tus Retos</h3>
+                <p>Reconocemos los puntos críticos de saturación y desorden en tus cursos actuales.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Aplica con Estrategia</h3>
+                <p>Implementa herramientas de síntesis, calendarios visuales y hábitos de estudio activos.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Disfruta tu Progreso</h3>
+                <p>Recupera tiempo libre para ti mientras mantienes calificaciones excelentes y estables.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Testimonios -->
+    <section id="testimonios">
+        <h2 class="section-title">Lo que dicen los estudiantes</h2>
+        <p class="section-subtitle">Historias reales de quienes ya pasaron del estrés al control absoluto.</p>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Antes pasaba noches enteras intentando ordenar mis diapositivas y terminaba agotada. Con estos consejos logré estructurar mis ciclos de forma limpia y ahora tengo tiempo para respirar."</p>
+                <div class="testimonial-author">
+                    <h4>Camila R.</h4>
+                    <span>Ingeniería de Sistemas</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"El enfoque de la plataforma es totalmente humano. Te entienden porque viven lo mismo que tú en la universidad. Me ayudó a organizarme sin sentirme culpable por descansar."</p>
+                <div class="testimonial-author">
+                    <h4>Mateo V.</h4>
+                    <span>Facultad de Negocios</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Final y ÚNICO Botón del Test -->
+    <section class="final-cta">
+        <h2>¿Listo para dar el siguiente paso en tu universidad?</h2>
+        <p>Da clic en el botón de abajo para iniciar tu diagnóstico personalizado y descubre cómo potenciar tus hábitos académicos hoy mismo.</p>
+        
+        <!-- Único botón del test ubicado estrictamente al final -->
+        <a href="#test" class="btn-test">Hacer el Test Académico Gratuito</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 StudentMind Connect. Todos los derechos reservados. Diseñado para acompañar tu éxito académico.</p>
+    </footer>
+
+    <!-- Script JavaScript interactivo básico -->
+    <script>
+        // Animación de aparición suave al hacer scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .step-card, .testimonial-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
