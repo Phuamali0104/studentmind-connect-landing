@@ -16,6 +16,8 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border-color: rgba(0, 240, 255, 0.2);
+            --shadow-cyan: 0 0 30px rgba(0, 240, 255, 0.5);
+            --shadow-cyan-lg: 0 0 60px rgba(0, 240, 255, 0.8);
         }
 
         * {
@@ -30,54 +32,29 @@
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.6;
+            padding-top: 80px;
         }
 
-        /* Navegación */
+        /* Navegación Simplificada */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(11, 15, 25, 0.85);
+            background: rgba(11, 15, 25, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             padding: 20px 50px;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid var(--primary-cyan);
-            object-fit: cover;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
-        }
-
-        .logo-text {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            color: var(--text-main);
-        }
-
-        .logo-text span {
-            color: var(--primary-cyan);
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 40px;
         }
 
         nav ul li a {
@@ -85,44 +62,67 @@
             color: var(--text-muted);
             font-weight: 500;
             transition: color 0.3s ease;
+            font-size: 16px;
         }
 
         nav ul li a:hover {
             color: var(--primary-cyan);
         }
 
-        /* Sección Hero (Impactante) */
+        /* Sección Hero (Horizontal: Texto izquierda, Logo derecha) */
         .hero {
             position: relative;
-            min-height: 100vh;
+            min-height: 85vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 140px 20px 80px 20px;
-            background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            gap: 50px;
         }
 
         .hero-content {
-            max-width: 800px;
+            flex: 1;
+            text-align: left;
             z-index: 2;
         }
 
-        .hero h1 {
-            font-size: clamp(36px, 5vw, 60px);
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #ffffff 30%, var(--primary-cyan) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .hero-logo-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
-        .hero p {
-            font-size: clamp(16px, 2vw, 19px);
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            line-height: 1.8;
+        .hero-logo-container::before {
+            content: '';
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: var(--primary-cyan);
+            filter: blur(90px);
+            opacity: 0.4;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .hero-logo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-cyan);
+            box-shadow: var(--shadow-cyan-lg);
+            position: relative;
+            z-index: 2;
+            animation: pulse-glow 2s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: var(--shadow-cyan); }
+            100% { box-shadow: var(--shadow-cyan-lg); }
         }
 
         .hero-badge {
@@ -137,6 +137,42 @@
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 4.5vw, 56px);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff 30%, var(--primary-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 1.5vw, 18px);
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        /* Estilo de los Botones */
+        .btn-main, .btn-test {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
+            color: var(--bg-dark);
+            font-weight: 700;
+            font-size: 18px;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: var(--shadow-cyan);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-main:hover, .btn-test:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-cyan-lg);
         }
 
         /* Secciones Generales */
@@ -164,10 +200,10 @@
             margin-right: auto;
         }
 
-        /* Tarjetas de Beneficios / Pilares */
+        /* Tarjetas de Beneficios */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
@@ -177,7 +213,6 @@
             border-radius: 20px;
             padding: 40px 30px;
             transition: transform 0.3s ease, border-color 0.3s ease;
-            position: relative;
         }
 
         .feature-card:hover {
@@ -186,20 +221,20 @@
         }
 
         .feature-icon {
-            font-size: 36px;
+            font-size: 40px;
             margin-bottom: 20px;
         }
 
         .feature-card h3 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             color: var(--text-main);
         }
 
         .feature-card p {
             color: var(--text-muted);
-            font-size: 15px;
+            font-size: 16px;
         }
 
         /* Cómo Funciona (Pasos) */
@@ -207,7 +242,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
-            position: relative;
         }
 
         .step-card {
@@ -279,12 +313,18 @@
             color: var(--primary-cyan);
         }
 
-        /* Sección Final y Único Botón de Test */
+        /* Sección Final y Botón */
         .final-cta {
             text-align: center;
             padding: 120px 20px;
             background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.08) 0%, transparent 70%);
             border-top: 1px solid var(--border-color);
+            max-width: 100%;
+        }
+
+        .final-cta-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .final-cta h2 {
@@ -296,26 +336,7 @@
         .final-cta p {
             color: var(--text-muted);
             font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto 40px auto;
-        }
-
-        .btn-test {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
-            color: var(--bg-dark);
-            font-weight: 700;
-            font-size: 18px;
-            padding: 18px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .btn-test:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 45px rgba(0, 240, 255, 0.8);
+            margin-bottom: 40px;
         }
 
         /* Footer */
@@ -325,28 +346,37 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             color: var(--text-muted);
             font-size: 14px;
+            background-color: #080a12;
         }
 
         /* Responsividad */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 40px;
+            }
+            .hero-content {
+                text-align: center;
+            }
+            .hero-logo {
+                width: 220px;
+                height: 220px;
+            }
             header {
                 padding: 15px 20px;
             }
             nav ul {
-                display: none;
+                gap: 20px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navegación con Logo de la Carpeta -->
+    <!-- Navegación -->
     <header>
-        <div class="logo-container">
-            <!-- Reemplaza el src con la ruta exacta de tu logo en tu carpeta local -->
-            <img src="LOGO TECHNICAL.jpg" alt="Logo StudentMind Connect" class="logo-img">
-            <div class="logo-text">StudentMind <span>Connect</span></div>
-        </div>
         <nav>
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
@@ -357,16 +387,24 @@
         </nav>
     </header>
 
-    <!-- Sección Hero / Inicio (Super Llamativa) -->
+    <!-- Sección Hero (Horizontal: Texto izquierda con botón, Logo derecha) -->
     <section id="inicio" class="hero">
         <div class="hero-content">
             <div class="hero-badge">Comunidad Académica Inteligente</div>
             <h1>Eleva tu rendimiento universitario sin descuidar tu paz mental</h1>
-            <p>Un espacio creado por estudiantes y para estudiantes. Descubre métodos de organización, optimiza tus tiempos de lectura, supera la saturación y encuentra el equilibrio perfecto en tu etapa universitaria.</p>
+            <p>Un espacio creado por estudiantes para estudiantes. Descubre métodos de estudio, organización y bienestar para conquistar tus metas.</p>
+            
+            <!-- Botón del test agregado también al principio -->
+            <a href="#test" class="btn-main">Hacer el Test Académico</a>
+        </div>
+
+        <div class="hero-logo-container">
+            <!-- RECUERDA: El nombre exacto de la imagen en tu carpeta con mayúsculas -->
+            <img src="LOGO TECHNICAL.jpg" alt="Logo StudentMind Connect" class="hero-logo">
         </div>
     </section>
 
-    <!-- Sección de Beneficios / Todo en General -->
+    <!-- Sección de Beneficios -->
     <section id="beneficios">
         <h2 class="section-title">Todo lo que necesitas en un solo lugar</h2>
         <p class="section-subtitle">Diseñado para ayudarte a simplificar cada ciclo académico con herramientas modernas y cercanas.</p>
@@ -437,13 +475,14 @@
         </div>
     </section>
 
-    <!-- Sección Final y ÚNICO Botón del Test -->
+    <!-- Sección Final y Botón del Test -->
     <section class="final-cta">
-        <h2>¿Listo para dar el siguiente paso en tu universidad?</h2>
-        <p>Da clic en el botón de abajo para iniciar tu diagnóstico personalizado y descubre cómo potenciar tus hábitos académicos hoy mismo.</p>
-        
-        <!-- Único botón del test ubicado estrictamente al final -->
-        <a href="#test" class="btn-test">Hacer el Test Académico Gratuito</a>
+        <div class="final-cta-content">
+            <h2>¿Listo para dar el siguiente paso en tu universidad?</h2>
+            <p>Da clic en el botón de abajo para iniciar tu diagnóstico personalizado y descubre cómo potenciar tus hábitos académicos hoy mismo.</p>
+            
+            <a href="#test" class="btn-test">Hacer el Test Académico Gratuito</a>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -451,28 +490,5 @@
         <p>&copy; 2026 StudentMind Connect. Todos los derechos reservados. Diseñado para acompañar tu éxito académico.</p>
     </footer>
 
-    <!-- Script JavaScript interactivo básico -->
-    <script>
-        // Animación de aparición suave al hacer scroll
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.feature-card, .step-card, .testimonial-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            observer.observe(card);
-        });
-    </script>
 </body>
 </html>
